@@ -31,21 +31,21 @@ fun MainApp() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(top=15.dp),
+            modifier = Modifier.fillMaxWidth().padding(top=20.dp),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "Inicio",
-                fontSize = 25.sp,
+                fontSize = 27.sp
             )
             Text(
                 text = "Ver pérdidas",
-                fontSize = 25.sp
+                fontSize = 27.sp
             )
             Text(
                 text = "Mapa",
-                fontSize = 25.sp
+                fontSize = 27.sp
             )
         }
     }
