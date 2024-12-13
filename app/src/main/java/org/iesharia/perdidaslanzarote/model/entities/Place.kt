@@ -13,5 +13,5 @@ data class Place(
     val name: String,
     val longitude: String,
     val latitude: String,
-    val numItems: Int
+    val totalItems: Int
 )
