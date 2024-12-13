@@ -1,6 +1,6 @@
 package org.iesharia.perdidaslanzarote.view
 
-import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,41 +11,47 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.DarkGray
-import androidx.compose.ui.graphics.Color.Companion.Green
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
 fun MainApp() {
+    val commonStyle = TextStyle(
+        fontSize = 27.sp,
+        color = Color.White,
+        fontWeight = FontWeight.Bold
+    )
+
     Column(
         modifier = Modifier
-            .padding(15.dp)
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(color = Color(0x0F505050)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(top=20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color(0xFF676767)),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
+                modifier = Modifier.padding(vertical = 25.dp),
                 text = "Inicio",
-                fontSize = 27.sp
+                style = commonStyle
             )
             Text(
+                modifier = Modifier.padding(vertical = 25.dp),
                 text = "Ver pérdidas",
-                fontSize = 27.sp
+                style = commonStyle
             )
             Text(
+                modifier = Modifier.padding(vertical = 25.dp),
                 text = "Mapa",
-                fontSize = 27.sp
+                style = commonStyle
             )
         }
     }
