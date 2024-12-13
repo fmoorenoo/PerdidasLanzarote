@@ -4,9 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import org.iesharia.perdidaslanzarote.model.entities.*
+import org.iesharia.perdidaslanzarote.model.dao.*
 
-@Database(entities = [], version = 1)
+@Database(entities = [LostItem::class, ItemType::class, Place::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
+    abstract fun lostItemDao(): LostItemDao
+    abstract fun itemTypeDao(): ItemTypeDao
+    abstract fun placeDao(): PlaceDao
 
     companion object {
         @Volatile
