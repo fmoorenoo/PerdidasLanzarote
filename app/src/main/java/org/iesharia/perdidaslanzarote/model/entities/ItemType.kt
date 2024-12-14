@@ -10,6 +10,5 @@ import androidx.room.PrimaryKey
 data class ItemType(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val name: String,
-    val numItems: Int
+    val name: String
 )

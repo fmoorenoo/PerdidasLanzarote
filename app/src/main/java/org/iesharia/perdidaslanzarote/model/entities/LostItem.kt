@@ -28,7 +28,7 @@ data class LostItem(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val itemName: String,
+    val itemTypeId: Int,
     val description: String? = null,
-    val placeId: Int,
-    val itemTypeId: Int
+    val placeId: Int
 )
