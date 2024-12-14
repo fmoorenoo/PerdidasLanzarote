@@ -17,8 +17,11 @@ fun HomeScreen() {
     var itemName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var selectedType by remember { mutableStateOf<Int?>(null) }
+    var expanded by remember { mutableStateOf(false) }
+    var selectedPlace by remember { mutableStateOf<String?>(null) }
 
     val itemTypes = listOf("Ejemplo", "Ejemplo")
+    val places = listOf("Ejemplo", "Ejemplo", "Ejemplo")
 
     Column(
         modifier = Modifier
@@ -88,5 +91,38 @@ fun HomeScreen() {
                 .padding(vertical = 8.dp),
             singleLine = false,
         )
+
+        Text(
+            text = "¿Dónde lo perdiste?",
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            color = Color.Black,
+            modifier = Modifier.padding(top = 16.dp)
+        )
+        Box(modifier = Modifier.fillMaxWidth()) {
+            OutlinedButton(
+                onClick = { expanded = true },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+            ) {
+                Text(selectedPlace ?: "Selecciona un lugar")
+            }
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                places.forEach { place ->
+                    DropdownMenuItem(
+                        text = { Text(place) },
+                        onClick = {
+                            selectedPlace = place
+                            expanded = false
+                        }
+                    )
+                }
+            }
+        }
     }
 }
