@@ -1,6 +1,7 @@
 package org.iesharia.perdidaslanzarote.view
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,17 +13,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.iesharia.perdidaslanzarote.model.entities.ItemType
+import org.iesharia.perdidaslanzarote.model.entities.Place
+import org.iesharia.perdidaslanzarote.viewmodel.AppViewModel
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(appViewModel: AppViewModel) {
     var itemName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
-    var selectedType by remember { mutableStateOf<Int?>(null) }
-    var expanded by remember { mutableStateOf(false) }
-    var selectedPlace by remember { mutableStateOf<String?>(null) }
+    var selectedType by remember { mutableStateOf<ItemType?>(null) }
+    var selectedPlace by remember { mutableStateOf<Place?>(null) }
+    var expandedPlace by remember { mutableStateOf(false) }
 
-    val itemTypes = listOf("Ejemplo", "Ejemplo")
-    val places = listOf("Ejemplo", "Ejemplo", "Ejemplo")
+    // Observar los datos desde el ViewModel
+    val itemTypes by appViewModel.getItemTypes().collectAsState(initial = emptyList())
+    val places by appViewModel.getPlaces().collectAsState(initial = emptyList())
 
     Column(
         modifier = Modifier
@@ -57,20 +62,30 @@ fun HomeScreen() {
             color = Color.Black,
             modifier = Modifier.padding(top = 16.dp)
         )
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+                .padding(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            itemTypes.forEachIndexed { index, type ->
-                Button(
-                    onClick = { selectedType = index },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (selectedType == index) Color(0xFFA7B1FF) else Color.LightGray
+            itemTypes.forEach { type ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp)
+                        .background(if (type == selectedType) Color(0xFFA7B1FF) else Color.LightGray)
+                        .clickable { selectedType = type },
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = if (type == selectedType) Color(0xFFA7B1FF) else Color.LightGray
                     )
                 ) {
-                    Text(type, color = if (selectedType == index) Color.White else Color.Black)
+                    Text(
+                        text = type.name,
+                        modifier = Modifier.padding(16.dp),
+                        color = if (type == selectedType) Color.White else Color.Black
+                    )
                 }
             }
         }
@@ -104,24 +119,24 @@ fun HomeScreen() {
         )
         Box(modifier = Modifier.fillMaxWidth()) {
             OutlinedButton(
-                onClick = { expanded = true },
+                onClick = { expandedPlace = true },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
             ) {
-                Text(selectedPlace ?: "Selecciona un lugar")
+                Text(selectedPlace?.name ?: "Selecciona un lugar")
             }
             DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-                modifier = Modifier.fillMaxWidth()
+                expanded = expandedPlace,
+                onDismissRequest = { expandedPlace = false },
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 places.forEach { place ->
                     DropdownMenuItem(
-                        text = { Text(place) },
+                        text = { Text(place.name) },
                         onClick = {
                             selectedPlace = place
-                            expanded = false
+                            expandedPlace = false
                         }
                     )
                 }
@@ -130,12 +145,22 @@ fun HomeScreen() {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(5.dp)
-                .width(40.dp),
+                .padding(5.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xFFD9E5FF)),
             shape = RoundedCornerShape(15.dp),
             onClick = {
-                // Añadir la pérdida a la base de datos
+                if (itemName.isNotBlank() && selectedType != null && selectedPlace != null) {
+                    appViewModel.addLostItem(
+                        itemName = itemName,
+                        itemTypeId = selectedType!!.id,
+                        description = description,
+                        placeId = selectedPlace!!.id
+                    )
+                    itemName = ""
+                    description = ""
+                    selectedType = null
+                    selectedPlace = null
+                }
             }
         ) {
             Column(
