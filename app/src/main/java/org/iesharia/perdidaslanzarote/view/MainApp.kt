@@ -2,6 +2,8 @@ package org.iesharia.perdidaslanzarote.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -12,41 +14,45 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import org.iesharia.perdidaslanzarote.viewmodel.AppViewModel
 
 @Composable
-fun MainApp() {
+fun MainApp(appViewModel: AppViewModel) {
     val currentScreen = remember { mutableStateOf("Inicio") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0xFF505050)),
+            .background(color = Color(0xFF8A8A8A)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier
-                .padding(top = 15.dp)
+                .padding(top = 18.dp)
                 .fillMaxWidth()
-                .background(color = MaterialTheme.colorScheme.primary),
+                .background(Color(0xFFD7A3FF)),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.SpaceAround
         ) {
             NavButton(
                 text = "Inicio",
                 isSelected = currentScreen.value == "Inicio",
-                onClick = { currentScreen.value = "Inicio" }
+                onClick = { currentScreen.value = "Inicio" },
+                modifier = Modifier.weight(1f)
             )
             NavButton(
                 text = "Ver pérdidas",
                 isSelected = currentScreen.value == "Ver pérdidas",
-                onClick = { currentScreen.value = "Ver pérdidas" }
+                onClick = { currentScreen.value = "Ver pérdidas" },
+                modifier = Modifier.weight(1f)
             )
             NavButton(
                 text = "Mapa",
                 isSelected = currentScreen.value == "Mapa",
-                onClick = { currentScreen.value = "Mapa" }
+                onClick = { currentScreen.value = "Mapa" },
+                modifier = Modifier.weight(1f)
             )
         }
 
@@ -58,7 +64,7 @@ fun MainApp() {
             verticalArrangement = Arrangement.Center
         ) {
             when (currentScreen.value) {
-                "Inicio" -> ""// Llamar a la pantalla de inicio
+                "Inicio" -> HomeScreen(appViewModel)
                 "Ver pérdidas" -> "" // Llamar a la pantalla de ver pérdidas
                 "Mapa" -> "" // Llamar a la pantalla de mapa
             }
@@ -67,17 +73,16 @@ fun MainApp() {
 }
 
 @Composable
-fun NavButton(text: String, isSelected: Boolean, onClick: () -> Unit) {
+fun NavButton(text: String, isSelected: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
         onClick = onClick,
-        shape = RectangleShape, // Forma rectangular (sin curvas)
+        shape = RoundedCornerShape(5.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = if (isSelected) Color(0xFF757575) else MaterialTheme.colorScheme.primary,
             contentColor = Color.White
         ),
-        modifier = Modifier
-            .padding(4.dp)
+        modifier = Modifier.padding(horizontal = 2.dp),
     ) {
-        Text(text = text)
+        Text(text = text, fontSize = 20.sp)
     }
 }
