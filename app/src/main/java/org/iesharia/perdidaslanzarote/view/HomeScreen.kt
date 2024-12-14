@@ -2,6 +2,7 @@ package org.iesharia.perdidaslanzarote.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -27,8 +28,10 @@ fun HomeScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF8985B6), shape = RoundedCornerShape(15.dp))
-            .padding(20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(20.dp)
+            .padding(vertical = 15.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         Card(
             modifier = Modifier.fillMaxWidth().padding(5.dp),
@@ -122,6 +125,31 @@ fun HomeScreen() {
                         }
                     )
                 }
+            }
+        }
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(5.dp)
+                .width(40.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFD9E5FF)),
+            shape = RoundedCornerShape(15.dp),
+            onClick = {
+                // Añadir la pérdida a la base de datos
+            }
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Publicar pérdida",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
             }
         }
     }
