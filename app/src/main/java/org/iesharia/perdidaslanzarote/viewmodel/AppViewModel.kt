@@ -3,6 +3,7 @@ package org.iesharia.perdidaslanzarote.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import org.iesharia.perdidaslanzarote.model.dao.*
 import org.iesharia.perdidaslanzarote.model.entities.*
@@ -39,5 +40,13 @@ class AppViewModel(
             val newPlace = Place(name = "", latitude = "", longitude = "")
             placeDao.insertPlace(newPlace)
         }
+    }
+
+    fun getItemTypes(): Flow<List<ItemType>> {
+        return itemTypeDao.getAllItemTypes()
+    }
+
+    fun getPlaces(): Flow<List<Place>> {
+        return placeDao.getAllPlaces()
     }
 }
