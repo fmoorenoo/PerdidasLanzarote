@@ -32,16 +32,15 @@ fun HomeScreen(appViewModel: AppViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF8985B6), shape = RoundedCornerShape(15.dp))
-            .padding(20.dp)
-            .padding(vertical = 15.dp),
+            .background(Color(0xFFE3E3F1), shape = RoundedCornerShape(10.dp))
+            .padding(horizontal = 24.dp, vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Card(
-            modifier = Modifier.fillMaxWidth().padding(5.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFFA7B1FF)),
-            shape = RoundedCornerShape(15.dp)
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF5A67D8)),
+            shape = RoundedCornerShape(12.dp)
         ) {
             Column(
                 modifier = Modifier.padding(16.dp).fillMaxWidth(),
@@ -50,41 +49,40 @@ fun HomeScreen(appViewModel: AppViewModel) {
                 Text(
                     text = "Registrar una pérdida",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    color = Color.Black
+                    fontSize = 22.sp,
+                    color = Color.White
                 )
             }
         }
         Text(
             text = "¿Qué has perdido?",
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
-            color = Color.Black,
-            modifier = Modifier.padding(top = 16.dp)
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp,
+            color = Color(0xFF313131),
+            modifier = Modifier.padding(top = 8.dp)
         )
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             itemTypes.forEach { type ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(4.dp)
-                        .background(if (type == selectedType) Color(0xFFA7B1FF) else Color.LightGray)
+                        .padding(horizontal = 8.dp)
                         .clickable { selectedType = type },
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(10.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = if (type == selectedType) Color(0xFFA7B1FF) else Color.LightGray
+                        containerColor = if (type == selectedType) Color(0xFF6A5ACD) else Color(0xFFD9DBE9)
                     )
                 ) {
                     Text(
                         text = type.name,
-                        modifier = Modifier.padding(16.dp),
-                        color = if (type == selectedType) Color.White else Color.Black
+                        modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp),
+                        fontSize = 16.sp,
+                        color = if (type == selectedType) Color.White else Color(0xFF4A4A4A)
                     )
                 }
             }
@@ -97,7 +95,13 @@ fun HomeScreen(appViewModel: AppViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
-            singleLine = true
+            singleLine = true,
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color(0xFFDCDCDC),
+                unfocusedContainerColor = Color(0xFFB0B0B0),
+                focusedLabelColor = Color(0xFF5A67D8),
+                cursorColor = Color(0xFF5A67D8)
+            )
         )
 
         OutlinedTextField(
@@ -108,21 +112,32 @@ fun HomeScreen(appViewModel: AppViewModel) {
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
             singleLine = false,
+            maxLines = 3,
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color(0xFFDCDCDC),
+                unfocusedContainerColor = Color(0xFFB0B0B0),
+                focusedLabelColor = Color(0xFF5A67D8),
+                cursorColor = Color(0xFF5A67D8)
+            )
         )
 
         Text(
             text = "¿Dónde lo perdiste?",
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
-            color = Color.Black,
-            modifier = Modifier.padding(top = 16.dp)
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp,
+            color = Color(0xFF313131),
+            modifier = Modifier.padding(top = 8.dp)
         )
-        Box(modifier = Modifier.fillMaxWidth()) {
+        Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
             OutlinedButton(
                 onClick = { expandedPlace = true },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp)
+                    .padding(vertical = 8.dp),
+                colors = ButtonDefaults.outlinedButtonColors(
+                    containerColor = Color(0xFFD9DBE9),
+                    contentColor = Color(0xFF4A4A4A)
+                )
             ) {
                 Text(selectedPlace?.name ?: "Selecciona un lugar")
             }
@@ -145,9 +160,9 @@ fun HomeScreen(appViewModel: AppViewModel) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(5.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFFD9E5FF)),
-            shape = RoundedCornerShape(15.dp),
+                .padding(horizontal = 8.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF48BB78)),
+            shape = RoundedCornerShape(12.dp),
             onClick = {
                 if (itemName.isNotBlank() && selectedType != null && selectedPlace != null) {
                     appViewModel.addLostItem(
@@ -173,7 +188,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
                     text = "Publicar pérdida",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
-                    color = Color.Black
+                    color = Color.White
                 )
             }
         }
