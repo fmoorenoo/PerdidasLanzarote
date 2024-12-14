@@ -1,15 +1,10 @@
 package org.iesharia.perdidaslanzarote.view
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,6 +14,9 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun HomeScreen() {
+    var selectedType by remember { mutableStateOf<Int?>(null) }
+    val itemTypes = listOf("Ejemplo", "Ejemplo")
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -36,11 +34,28 @@ fun HomeScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Registrar una pérdida",
+                    text = "¿Qué has perdido?",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     color = Color.Black
                 )
+            }
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            itemTypes.forEachIndexed { index, type ->
+                Button(
+                    onClick = { selectedType = index },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (selectedType == index) Color(0xFFA7B1FF) else Color.LightGray
+                    )
+                ) {
+                    Text(type, color = if (selectedType == index) Color.White else Color.Black)
+                }
             }
         }
     }
