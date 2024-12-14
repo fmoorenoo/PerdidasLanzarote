@@ -14,7 +14,10 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun HomeScreen() {
+    var itemName by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
     var selectedType by remember { mutableStateOf<Int?>(null) }
+
     val itemTypes = listOf("Ejemplo", "Ejemplo")
 
     Column(
@@ -34,13 +37,20 @@ fun HomeScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "¿Qué has perdido?",
+                    text = "Registrar una pérdida",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     color = Color.Black
                 )
             }
         }
+        Text(
+            text = "¿Qué has perdido?",
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            color = Color.Black,
+            modifier = Modifier.padding(top = 16.dp)
+        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -58,5 +68,25 @@ fun HomeScreen() {
                 }
             }
         }
+
+        OutlinedTextField(
+            value = itemName,
+            onValueChange = { itemName = it },
+            label = { Text("Nombre del ítem") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            singleLine = true
+        )
+
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Descripción (opcional)") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            singleLine = false,
+        )
     }
 }
