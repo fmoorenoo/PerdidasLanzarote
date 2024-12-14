@@ -16,9 +16,9 @@ class MainActivity : ComponentActivity() {
         val itemTypeDao = database.itemTypeDao()
         val placeDao = database.placeDao()
 
-        val mapViewModel = AppViewModel(lostItemDao, itemTypeDao, placeDao)
+        val appViewModel = AppViewModel(lostItemDao, itemTypeDao, placeDao)
         setContent {
-            MainApp(mapViewModel)
+            MainApp(appViewModel)
         }
     }
 }
