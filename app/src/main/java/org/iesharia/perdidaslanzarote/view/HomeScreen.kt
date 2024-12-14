@@ -93,7 +93,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
         OutlinedTextField(
             value = itemName,
             onValueChange = { itemName = it },
-            label = { Text("Nombre del ítem") },
+            label = { Text(text = "Nombre del ${(selectedType?.name)?.lowercase() ?: "Nombre"}") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
