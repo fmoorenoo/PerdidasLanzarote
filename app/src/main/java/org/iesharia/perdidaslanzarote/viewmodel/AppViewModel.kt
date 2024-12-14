@@ -26,4 +26,18 @@ class AppViewModel(
             lostItemDao.insertLostItem(newLostItem)
         }
     }
+
+    fun addItemType() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val newItemType = ItemType(name = "")
+            itemTypeDao.insertItemType(newItemType)
+        }
+    }
+
+    fun addPlace() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val newPlace = Place(name = "", latitude = "", longitude = "")
+            placeDao.insertPlace(newPlace)
+        }
+    }
 }
