@@ -66,7 +66,7 @@ fun MainApp(appViewModel: AppViewModel) {
             when (currentScreen.value) {
                 "Inicio" -> HomeScreen(appViewModel)
                 "Ver pérdidas" -> "" // Llamar a la pantalla de ver pérdidas
-                "Mapa" -> "" // Llamar a la pantalla de mapa
+                "Mapa" -> MapScreen()
             }
         }
     }
