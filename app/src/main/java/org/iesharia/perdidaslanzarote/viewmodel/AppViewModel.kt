@@ -55,7 +55,7 @@ class AppViewModel(
         }
     }
 
-    fun getLostItemsByPlace(placeId: Int): List<Quadruple<String, String, String?, String?>> {
+    fun getLostItemsByPlace(placeId: Int): List<Quadruple<String, String, String?, String>> {
         return runBlocking {
             lostItemDao.getLostItemsByPlaceId(placeId).map { lostItem ->
                 val itemType = itemTypeDao.getItemTypeById(lostItem.itemTypeId)
