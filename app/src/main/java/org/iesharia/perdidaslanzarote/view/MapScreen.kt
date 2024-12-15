@@ -165,7 +165,7 @@ fun MapScreen(appViewModel: AppViewModel) {
                                             text = itemName,
                                             fontWeight = FontWeight(500),
                                             fontSize = 20.sp,
-                                            modifier = Modifier.padding(vertical = 10.dp)
+                                            modifier = Modifier.padding(vertical = 6.dp)
                                         )
 
                                         // Icono de 'mostrar más' si hay descripción
@@ -190,7 +190,8 @@ fun MapScreen(appViewModel: AppViewModel) {
                                             color = Color.DarkGray,
                                             fontSize = 17.sp,
                                             modifier = Modifier
-                                                .padding(4.dp)
+                                                .padding(horizontal = 11.dp)
+                                                .padding(bottom = 4.dp)
                                                 .fillMaxWidth()
                                         )
                                     }
