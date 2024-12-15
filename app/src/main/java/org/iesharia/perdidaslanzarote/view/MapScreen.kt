@@ -1,11 +1,22 @@
 package org.iesharia.perdidaslanzarote.view
 
+import androidx.compose.foundation.background
 import org.iesharia.perdidaslanzarote.R
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.utsman.osmandcompose.*
 import org.iesharia.perdidaslanzarote.viewmodel.AppViewModel
@@ -73,7 +84,27 @@ fun MapScreen(appViewModel: AppViewModel) {
                     state = markerState,
                     title = place.name,
                     icon = drawable
-                )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .background(
+                                color = Color(0xD0000000),
+                                shape = RoundedCornerShape(8.dp)
+                            )
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        // Nombre del lugar
+                        Text(
+                            text = it.title,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 22.sp,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                    }
+                }
             }
         }
     }
