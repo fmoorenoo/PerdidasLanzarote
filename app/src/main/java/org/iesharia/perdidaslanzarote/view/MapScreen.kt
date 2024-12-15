@@ -1,17 +1,30 @@
 package org.iesharia.perdidaslanzarote.view
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import org.iesharia.perdidaslanzarote.R
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -75,10 +88,11 @@ fun MapScreen(appViewModel: AppViewModel) {
                     lostItemsCount == 2 -> R.drawable.two_items
                     lostItemsCount == 3 -> R.drawable.three_items
                     lostItemsCount > 3 -> R.drawable.more_items
-                    else ->  R.drawable.one_item
+                    else -> R.drawable.one_item
                 }
 
                 val drawable = ContextCompat.getDrawable(context, markerImage)
+                val lostItems = appViewModel.getLostItemsByPlace(place.id)
 
                 Marker(
                     state = markerState,
@@ -103,6 +117,35 @@ fun MapScreen(appViewModel: AppViewModel) {
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(bottom = 8.dp)
                         )
+                        // Mostrar pérdidas
+                        lostItems.forEach { (itemName, itemType, description) ->
+                            var showDescription by remember { mutableStateOf(false) }
+
+                            Card(
+                                modifier = Modifier
+                                    .widthIn(0.dp, 200.dp)
+                                    .padding(vertical = 4.dp)
+                                    .background(Color(0xFF424242)),
+                                shape = RectangleShape
+                            ) {
+                                Column(
+                                    modifier = Modifier
+                                        .padding(4.dp)
+                                ) {
+                                    // Tipo de ítem
+                                    Text(
+                                        text = itemType,
+                                        fontWeight = FontWeight(500),
+                                        fontSize = 17.sp,
+                                        modifier = Modifier
+                                            .clip(shape = RoundedCornerShape(6.dp))
+                                            .background(Color(0xFFFC9E9E))
+                                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
