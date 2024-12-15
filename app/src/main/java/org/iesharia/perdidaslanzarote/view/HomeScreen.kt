@@ -1,5 +1,6 @@
 package org.iesharia.perdidaslanzarote.view
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -31,6 +33,8 @@ fun HomeScreen(appViewModel: AppViewModel) {
     // Observar los datos desde el ViewModel
     val itemTypes by appViewModel.getItemTypes().collectAsState(initial = emptyList())
     val places by appViewModel.getPlaces().collectAsState(initial = emptyList())
+
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -108,23 +112,6 @@ fun HomeScreen(appViewModel: AppViewModel) {
         )
 
         OutlinedTextField(
-            value = description,
-            onValueChange = { description = it },
-            label = { Text("Descripción (opcional)") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            singleLine = false,
-            maxLines = 3,
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color(0xFFDCDCDC),
-                unfocusedContainerColor = Color(0xFFB0B0B0),
-                focusedLabelColor = Color(0xFF5A67D8),
-                cursorColor = Color(0xFF5A67D8)
-            )
-        )
-
-        OutlinedTextField(
             value = phoneNumber,
             onValueChange = { newValue ->
                 phoneNumber = newValue.filter { it.isDigit() }
@@ -137,6 +124,23 @@ fun HomeScreen(appViewModel: AppViewModel) {
             keyboardOptions = KeyboardOptions.Default.copy(
                 keyboardType = KeyboardType.Phone
             ),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color(0xFFDCDCDC),
+                unfocusedContainerColor = Color(0xFFB0B0B0),
+                focusedLabelColor = Color(0xFF5A67D8),
+                cursorColor = Color(0xFF5A67D8)
+            )
+        )
+
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Descripción (opcional)") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            singleLine = false,
+            maxLines = 3,
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color(0xFFDCDCDC),
                 unfocusedContainerColor = Color(0xFFB0B0B0),
@@ -188,7 +192,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
             colors = CardDefaults.cardColors(containerColor = Color(0xFF48BB78)),
             shape = RoundedCornerShape(12.dp),
             onClick = {
-                if (itemName.isNotBlank() && selectedType != null && selectedPlace != null) {
+                if (itemName.isNotBlank() && selectedType != null && selectedPlace != null && phoneNumber.length == 9) {
                     appViewModel.addLostItem(
                         itemName = itemName,
                         itemTypeId = selectedType!!.id,
@@ -200,6 +204,11 @@ fun HomeScreen(appViewModel: AppViewModel) {
                     description = ""
                     selectedType = null
                     selectedPlace = null
+                }
+                else if (phoneNumber.length != 9) {
+                    Toast.makeText(context, "El número de teléfono debe tener 9 dígitos", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Completa los campos obligatorios", Toast.LENGTH_SHORT).show()
                 }
             }
         ) {
