@@ -143,6 +143,46 @@ fun MapScreen(appViewModel: AppViewModel) {
                                             .padding(horizontal = 8.dp, vertical = 4.dp),
                                         textAlign = TextAlign.Center
                                     )
+
+                                    // Nombre y descripción
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = itemName,
+                                            fontWeight = FontWeight(500),
+                                            fontSize = 20.sp,
+                                        )
+
+                                        // Icono de 'mostrar más' si hay descripción
+                                        IconButton(
+                                            enabled = if (description.isNullOrEmpty()) false else true,
+                                            onClick = { showDescription = !showDescription }
+                                        ) {
+                                            Icon(
+                                                imageVector = if (showDescription) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                                contentDescription = if (showDescription) "Ocultar" else "Mostrar",
+                                                tint = Color(0xFF5A67D8),
+                                                modifier = Modifier.size(30.dp)
+                                            )
+                                        }
+
+                                    }
+
+                                    // Descripción
+                                    if (showDescription && !description.isNullOrEmpty()) {
+                                        Text(
+                                            text = description,
+                                            color = Color.DarkGray,
+                                            fontSize = 17.sp,
+                                            textAlign = TextAlign.Center,
+                                            modifier = Modifier
+                                                .padding(4.dp)
+                                                .fillMaxWidth()
+                                        )
+                                    }
                                 }
                             }
                         }
