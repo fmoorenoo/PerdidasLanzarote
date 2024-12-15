@@ -37,9 +37,32 @@ class AppViewModel(
             lostItemDao.insertLostItem(newLostItem)
         }
     }
+    fun getAllLostItems(): Flow<List<LostItem>> = lostItemDao.getAllLostItems()
+
+    fun updateLostItem(updatedItem: LostItem) {
+        viewModelScope.launch {
+            lostItemDao.updateLostItem(updatedItem)
+        }
+    }
+
+    fun deleteLostItem(itemId: Int) {
+        viewModelScope.launch {
+            val lostItem = lostItemDao.getLostItemById(itemId)
+            if (lostItem != null) {
+                lostItemDao.deleteLostItem(lostItem)
+            }
+        }
+    }
+
 
     fun getItemTypes(): Flow<List<ItemType>> {
         return itemTypeDao.getAllItemTypes()
+    }
+
+    fun getItemTypeById(itemTypeId: Int): ItemType? {
+        return runBlocking {
+            itemTypeDao.getItemTypeById(itemTypeId)
+        }
     }
 
     fun getPlaces(): Flow<List<Place>> {
