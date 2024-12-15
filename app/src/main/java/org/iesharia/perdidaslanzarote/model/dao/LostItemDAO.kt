@@ -12,4 +12,8 @@ interface LostItemDao {
 
     @Query("SELECT * FROM lost_item WHERE placeId = :placeId")
     suspend fun getLostItemsByPlaceId(placeId: Int): List<LostItem>
+
+    @Query("SELECT COUNT(*) FROM lost_item WHERE placeId = :placeId")
+    suspend fun getLostItemsCountByPlaceId(placeId: Int): Int
+
 }
