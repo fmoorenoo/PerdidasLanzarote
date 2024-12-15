@@ -5,12 +5,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.iesharia.perdidaslanzarote.model.entities.ItemType
@@ -21,6 +23,7 @@ import org.iesharia.perdidaslanzarote.viewmodel.AppViewModel
 fun HomeScreen(appViewModel: AppViewModel) {
     var itemName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+    var phoneNumber by remember { mutableStateOf("") }
     var selectedType by remember { mutableStateOf<ItemType?>(null) }
     var selectedPlace by remember { mutableStateOf<Place?>(null) }
     var expandedPlace by remember { mutableStateOf(false) }
@@ -121,6 +124,27 @@ fun HomeScreen(appViewModel: AppViewModel) {
             )
         )
 
+        OutlinedTextField(
+            value = phoneNumber,
+            onValueChange = { newValue ->
+                phoneNumber = newValue.filter { it.isDigit() }
+            },
+            label = { Text("Teléfono de contacto") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Phone
+            ),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color(0xFFDCDCDC),
+                unfocusedContainerColor = Color(0xFFB0B0B0),
+                focusedLabelColor = Color(0xFF5A67D8),
+                cursorColor = Color(0xFF5A67D8)
+            )
+        )
+
         Text(
             text = "¿Dónde lo perdiste?",
             fontWeight = FontWeight.SemiBold,
@@ -168,6 +192,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
                     appViewModel.addLostItem(
                         itemName = itemName,
                         itemTypeId = selectedType!!.id,
+                        contact = phoneNumber,
                         description = description,
                         placeId = selectedPlace!!.id
                     )
