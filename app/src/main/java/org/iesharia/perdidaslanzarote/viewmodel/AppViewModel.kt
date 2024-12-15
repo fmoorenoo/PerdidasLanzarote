@@ -48,11 +48,15 @@ class AppViewModel(
         }
     }
 
-    fun getLostItemsByPlace(placeId: Int): List<Pair<String, String>> {
+    fun getLostItemsByPlace(placeId: Int): List<Triple<String, String, String?>> {
         return runBlocking {
             lostItemDao.getLostItemsByPlaceId(placeId).map { lostItem ->
                 val itemType = itemTypeDao.getItemTypeById(lostItem.itemTypeId)
-                Pair(lostItem.itemName, itemType?.name ?: "Sin tipo")
+                Triple(
+                    lostItem.itemName,
+                    itemType?.name ?: "Sin tipo",
+                    lostItem.description
+                )
             }
         }
     }
