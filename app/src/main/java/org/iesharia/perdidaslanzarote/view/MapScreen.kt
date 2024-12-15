@@ -1,9 +1,12 @@
 package org.iesharia.perdidaslanzarote.view
 
+import org.iesharia.perdidaslanzarote.R
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat
 import com.utsman.osmandcompose.*
 import org.iesharia.perdidaslanzarote.viewmodel.AppViewModel
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase
@@ -52,9 +55,24 @@ fun MapScreen(appViewModel: AppViewModel) {
                     )
                 )
 
+                val lostItemsCount = appViewModel.getLostItemsCountByPlace(place.id)
+                val context = LocalContext.current
+
+                // Icono según la cantidad de pérdidas en el lugar
+                val markerImage = when {
+                    lostItemsCount == 1 -> R.drawable.one_item
+                    lostItemsCount == 2 -> R.drawable.two_items
+                    lostItemsCount == 3 -> R.drawable.three_items
+                    lostItemsCount > 3 -> R.drawable.more_items
+                    else ->  R.drawable.one_item
+                }
+
+                val drawable = ContextCompat.getDrawable(context, markerImage)
+
                 Marker(
                     state = markerState,
                     title = place.name,
+                    icon = drawable
                 )
             }
         }
