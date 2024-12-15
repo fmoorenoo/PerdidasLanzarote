@@ -2,8 +2,10 @@ package org.iesharia.perdidaslanzarote.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.iesharia.perdidaslanzarote.model.dao.*
 import org.iesharia.perdidaslanzarote.model.entities.*
@@ -28,25 +30,20 @@ class AppViewModel(
         }
     }
 
-    fun addItemType() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val newItemType = ItemType(name = "")
-            itemTypeDao.insertItemType(newItemType)
-        }
-    }
-
-    fun addPlace() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val newPlace = Place(name = "", latitude = "", longitude = "")
-            placeDao.insertPlace(newPlace)
-        }
-    }
-
     fun getItemTypes(): Flow<List<ItemType>> {
         return itemTypeDao.getAllItemTypes()
     }
 
     fun getPlaces(): Flow<List<Place>> {
         return placeDao.getAllPlaces()
+    }
+
+    fun getPlacesWithLostItems(): Flow<List<Place>> {
+        return placeDao.getAllPlaces().map { places ->
+            places.filter { place ->
+                val lostItems = lostItemDao.getLostItemsByPlaceId(place.id)
+                lostItems.isNotEmpty()
+            }
+        }
     }
 }
