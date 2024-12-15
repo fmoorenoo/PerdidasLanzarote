@@ -13,14 +13,17 @@ interface LostItemDao {
     @Insert
     suspend fun insertLostItem(lostItem: LostItem)
 
-    @Query("SELECT * FROM lost_item")
-    fun getAllLostItems(): Flow<List<LostItem>>
-
     @Update
     suspend fun updateLostItem(lostItem: LostItem)
 
     @Delete
     suspend fun deleteLostItem(lostItem: LostItem)
+
+    @Query("SELECT * FROM lost_item")
+    fun getAllLostItems(): Flow<List<LostItem>>
+
+    @Query("SELECT * FROM lost_item WHERE id = :itemId")
+    suspend fun getLostItemById(itemId: Int): LostItem?
 
     @Query("SELECT * FROM lost_item WHERE placeId = :placeId")
     suspend fun getLostItemsByPlaceId(placeId: Int): List<LostItem>
