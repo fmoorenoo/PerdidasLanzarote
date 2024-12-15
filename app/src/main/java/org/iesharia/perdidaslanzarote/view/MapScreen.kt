@@ -118,12 +118,12 @@ fun MapScreen(appViewModel: AppViewModel) {
                             modifier = Modifier.padding(bottom = 8.dp)
                         )
                         // Mostrar pérdidas
-                        lostItems.forEach { (itemName, itemType, description) ->
+                        lostItems.forEach { (itemName, itemType, description, contact) ->
                             var showDescription by remember { mutableStateOf(false) }
 
                             Card(
                                 modifier = Modifier
-                                    .widthIn(0.dp, 200.dp)
+                                    .widthIn(0.dp, 250.dp)
                                     .padding(vertical = 4.dp)
                                     .background(Color(0xFF424242)),
                                 shape = RectangleShape
@@ -132,17 +132,28 @@ fun MapScreen(appViewModel: AppViewModel) {
                                     modifier = Modifier
                                         .padding(4.dp)
                                 ) {
-                                    // Tipo de ítem
-                                    Text(
-                                        text = itemType,
-                                        fontWeight = FontWeight(500),
-                                        fontSize = 17.sp,
-                                        modifier = Modifier
-                                            .clip(shape = RoundedCornerShape(6.dp))
-                                            .background(Color(0xFFFC9E9E))
-                                            .padding(horizontal = 8.dp, vertical = 4.dp),
-                                        textAlign = TextAlign.Center
-                                    )
+                                    // Tipo de ítem y tfno de contacto
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth().padding(horizontal = 5.dp).padding(top = 3.dp),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = itemType,
+                                            fontWeight = FontWeight(500),
+                                            fontSize = 17.sp,
+                                            modifier = Modifier
+                                                .clip(shape = RoundedCornerShape(6.dp))
+                                                .background(Color(0xFFFC9E9E))
+                                                .padding(horizontal = 8.dp, vertical = 4.dp),
+                                            textAlign = TextAlign.Center
+                                        )
+                                        Text(
+                                            text = "Tfno: $contact",
+                                            fontSize = 17.sp,
+                                        )
+                                    }
+
 
                                     // Nombre y descripción
                                     Row(
@@ -154,21 +165,22 @@ fun MapScreen(appViewModel: AppViewModel) {
                                             text = itemName,
                                             fontWeight = FontWeight(500),
                                             fontSize = 20.sp,
+                                            modifier = Modifier.padding(vertical = 10.dp)
                                         )
 
                                         // Icono de 'mostrar más' si hay descripción
-                                        IconButton(
-                                            enabled = if (description.isNullOrEmpty()) false else true,
-                                            onClick = { showDescription = !showDescription }
-                                        ) {
-                                            Icon(
-                                                imageVector = if (showDescription) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                                                contentDescription = if (showDescription) "Ocultar" else "Mostrar",
-                                                tint = Color(0xFF5A67D8),
-                                                modifier = Modifier.size(30.dp)
-                                            )
+                                        if (!description.isNullOrEmpty()) {
+                                            IconButton(
+                                                onClick = { showDescription = !showDescription }
+                                            ) {
+                                                Icon(
+                                                    imageVector = if (showDescription) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                                    contentDescription = if (showDescription) "Ocultar" else "Mostrar",
+                                                    tint = Color(0xFF5A67D8),
+                                                    modifier = Modifier.size(30.dp)
+                                                )
+                                            }
                                         }
-
                                     }
 
                                     // Descripción
@@ -177,7 +189,6 @@ fun MapScreen(appViewModel: AppViewModel) {
                                             text = description,
                                             color = Color.DarkGray,
                                             fontSize = 17.sp,
-                                            textAlign = TextAlign.Center,
                                             modifier = Modifier
                                                 .padding(4.dp)
                                                 .fillMaxWidth()
