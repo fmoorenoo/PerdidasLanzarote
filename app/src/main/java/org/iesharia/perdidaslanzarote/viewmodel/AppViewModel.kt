@@ -2,7 +2,6 @@ package org.iesharia.perdidaslanzarote.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -19,11 +18,12 @@ class AppViewModel(
 ) : ViewModel() {
 
     // Añadir una nueva pérdida
-    fun addLostItem(itemName: String, itemTypeId: Int, description: String?, placeId: Int) {
+    fun addLostItem(itemName: String, itemTypeId: Int,contact: String, description: String?, placeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val newLostItem = LostItem(
                 itemName = itemName,
                 itemTypeId = itemTypeId,
+                contact = contact,
                 description = description,
                 placeId = placeId
             )

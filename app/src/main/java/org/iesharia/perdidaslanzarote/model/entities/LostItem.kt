@@ -29,6 +29,7 @@ data class LostItem(
     val id: Int = 0,
     val itemName: String,
     val itemTypeId: Int,
+    val contact: String,
     val description: String? = null,
     val placeId: Int
 )
