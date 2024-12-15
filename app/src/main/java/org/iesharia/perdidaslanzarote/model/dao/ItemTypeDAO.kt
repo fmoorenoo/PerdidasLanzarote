@@ -13,4 +13,7 @@ interface ItemTypeDao {
 
     @Insert
     suspend fun insertItemType(itemType: ItemType)
+
+    @Query("SELECT * FROM item_type WHERE id = :itemTypeId")
+    suspend fun getItemTypeById(itemTypeId: Int): ItemType?
 }
