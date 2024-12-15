@@ -17,6 +17,13 @@ class AppViewModel(
     private val placeDao: PlaceDao
 ) : ViewModel() {
 
+    data class Quadruple<A, B, C, D>(
+        val first: A,
+        val second: B,
+        val third: C,
+        val fourth: D
+    )
+
     // Añadir una nueva pérdida
     fun addLostItem(itemName: String, itemTypeId: Int,contact: String, description: String?, placeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
