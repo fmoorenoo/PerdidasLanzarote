@@ -110,7 +110,7 @@ fun MapScreen(appViewModel: AppViewModel) {
                     ) {
                         // Nombre del lugar
                         Text(
-                            text = it.title,
+                            text = "${it.title}  -  $lostItemsCount pérdidas",
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
                             fontSize = 22.sp,
@@ -165,7 +165,7 @@ fun MapScreen(appViewModel: AppViewModel) {
                                             text = itemName,
                                             fontWeight = FontWeight(500),
                                             fontSize = 20.sp,
-                                            modifier = Modifier.padding(vertical = 6.dp)
+                                            modifier = Modifier.padding(vertical = 11.dp)
                                         )
 
                                         // Icono de 'mostrar más' si hay descripción
