@@ -1,6 +1,7 @@
 package org.iesharia.perdidaslanzarote.view
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -30,9 +31,30 @@ fun LostItemsScreen(appViewModel: AppViewModel) {
             fontSize = 24.sp,
             modifier = Modifier.padding(bottom = 8.dp)
         )
+        if (lostItems.isEmpty()) {
+            Text(text = "No hay pérdidas registradas")
+        }
 
         lostItems.forEach { lostItem ->
             val lostItemType = appViewModel.getItemTypeById(lostItem.itemTypeId)
+            Card(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                shape = RoundedCornerShape(5.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        "Nombre: ${lostItem.itemName}",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp
+                    )
+                    Text(text = "Tipo: ${lostItemType?.name}", fontSize = 18.sp)
+                    Text(
+                        text = "Descripción: ${lostItem.description ?: "Sin descripción"}",
+                        fontSize = 18.sp
+                    )
+                    Text(text = "Contacto: ${lostItem.contact}", fontSize = 18.sp)
+                }
+            }
         }
     }
 }
