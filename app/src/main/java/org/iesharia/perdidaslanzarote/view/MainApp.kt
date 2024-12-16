@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.iesharia.perdidaslanzarote.view.lostitems_screen.LostItemsScreen
 import org.iesharia.perdidaslanzarote.viewmodel.AppViewModel
 
 @Composable
@@ -30,14 +31,13 @@ fun MainApp(appViewModel: AppViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0xFF8A8A8A)),
+            .background(color = Color(0xFF7278B0)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier
                 .padding(top = 18.dp)
-                .fillMaxWidth()
-                .background(Color(0xFFD7A3FF)),
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround
         ) {
@@ -83,7 +83,7 @@ fun NavButton(text: String, icon: ImageVector, isSelected: Boolean, onClick: () 
         onClick = onClick,
         shape = RoundedCornerShape(5.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (isSelected) Color(0xFF5A67D8) else Color.Gray,
+            containerColor = if (isSelected) Color(0xFF5AA1D8) else Color.Gray,
             contentColor = Color.White
         ),
         modifier = Modifier.padding(horizontal = 4.dp)
