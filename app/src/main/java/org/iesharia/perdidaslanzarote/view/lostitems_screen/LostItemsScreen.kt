@@ -44,25 +44,32 @@ fun LostItemsScreen(appViewModel: AppViewModel) {
             val lostItemType = appViewModel.getItemTypeById(lostItem.itemTypeId)
             val place = appViewModel.getPlaceById(lostItem.placeId)
             Card(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                shape = RoundedCornerShape(5.dp)
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(10.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFE8E5FF)),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
+                Column(modifier = Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        "Nombre: ${lostItem.itemName}",
+                        text = lostItem.itemName,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
+                        fontSize = 20.sp
                     )
-                    Text(text = "${lostItemType?.name}${place.name}", fontSize = 18.sp)
-                    Text(text = "Perdido en ${place.name}", fontSize = 18.sp)
+                    HorizontalDivider(color = Color.Gray, thickness = 1.dp)
+                    Text(text = "Tipo: ${lostItemType?.name ?: "Sin tipo"}", fontSize = 16.sp)
+                    Text(text = "Lugar: ${place.name}", fontSize = 16.sp)
                     Text(
                         text = "Descripción: ${lostItem.description ?: "Sin descripción"}",
-                        fontSize = 18.sp
+                        fontSize = 16.sp,
                     )
-                    Text(text = "Contacto: ${lostItem.contact}", fontSize = 18.sp)
+                    Text(
+                        text = "Contacto: ${lostItem.contact}",
+                        fontSize = 16.sp,
+                        color = Color.Blue
+                    )
                     Row(
-                        modifier = Modifier.fillMaxWidth().padding(top = 15.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Button(
                             onClick = {
@@ -83,7 +90,7 @@ fun LostItemsScreen(appViewModel: AppViewModel) {
                         }
                         Button(
                             onClick = { appViewModel.deleteLostItem(lostItem.id) },
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xCB6574FA)),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xCBFF6767)),
                             shape = RoundedCornerShape(5.dp),
                             modifier = Modifier.width(160.dp)
                         ) {
