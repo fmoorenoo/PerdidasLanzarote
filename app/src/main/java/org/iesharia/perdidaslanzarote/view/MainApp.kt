@@ -39,6 +39,7 @@ fun MainApp(appViewModel: AppViewModel) {
         Row(
             modifier = Modifier
                 .padding(top = 18.dp)
+                .padding(horizontal = 10.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround
@@ -88,7 +89,7 @@ fun NavButton(text: String, icon: ImageVector, isSelected: Boolean, onClick: () 
             containerColor = if (isSelected) Color(0xFF5AA1D8) else Color.Gray,
             contentColor = Color.White
         ),
-        modifier = Modifier.padding(horizontal = 4.dp)
+        modifier = Modifier.padding(horizontal = 1.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -96,7 +97,7 @@ fun NavButton(text: String, icon: ImageVector, isSelected: Boolean, onClick: () 
         ) {
             Icon(imageVector = icon, contentDescription = text, modifier = Modifier.size(20.dp))
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = text, fontSize = 16.sp)
+            Text(text = text, fontSize = 17.sp)
         }
     }
 }
