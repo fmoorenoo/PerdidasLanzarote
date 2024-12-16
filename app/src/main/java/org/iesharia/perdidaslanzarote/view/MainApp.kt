@@ -21,7 +21,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.iesharia.perdidaslanzarote.view.home_screen.HomeScreen
 import org.iesharia.perdidaslanzarote.view.lostitems_screen.LostItemsScreen
+import org.iesharia.perdidaslanzarote.view.map_screen.MapScreen
 import org.iesharia.perdidaslanzarote.viewmodel.AppViewModel
 
 @Composable
