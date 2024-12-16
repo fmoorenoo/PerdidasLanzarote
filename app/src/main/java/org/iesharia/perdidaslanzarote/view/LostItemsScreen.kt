@@ -2,9 +2,13 @@ package org.iesharia.perdidaslanzarote.view
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -53,6 +57,42 @@ fun LostItemsScreen(appViewModel: AppViewModel) {
                         fontSize = 18.sp
                     )
                     Text(text = "Contacto: ${lostItem.contact}", fontSize = 18.sp)
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Button(
+                            onClick = {
+                                itemToEdit = lostItem
+                                showEditor = true
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xCB6574FA)),
+                            shape = RoundedCornerShape(5.dp),
+                            modifier = Modifier.width(160.dp)
+                        ) {
+                            Text(text = "Editar", fontSize = 18.sp)
+                            Spacer(modifier = Modifier.width(20.dp))
+                            Icon(
+                                imageVector = Icons.Default.Create,
+                                contentDescription = "Edit",
+                                modifier = Modifier.size(25.dp)
+                            )
+                        }
+                        Button(
+                            onClick = { appViewModel.deleteLostItem(lostItem.id) },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xCB6574FA)),
+                            shape = RoundedCornerShape(5.dp),
+                            modifier = Modifier.width(160.dp)
+                        ) {
+                            Text(text = "Eliminar", fontSize = 18.sp)
+                            Spacer(modifier = Modifier.width(20.dp))
+                            Icon(
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = "Delete",
+                                modifier = Modifier.size(25.dp),
+                            )
+                        }
+                    }
                 }
             }
         }
