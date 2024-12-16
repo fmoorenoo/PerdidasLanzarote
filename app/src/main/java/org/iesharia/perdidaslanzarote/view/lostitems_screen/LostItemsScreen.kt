@@ -42,6 +42,7 @@ fun LostItemsScreen(appViewModel: AppViewModel) {
 
         lostItems.forEach { lostItem ->
             val lostItemType = appViewModel.getItemTypeById(lostItem.itemTypeId)
+            val place = appViewModel.getPlaceById(lostItem.placeId)
             Card(
                 modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
                 shape = RoundedCornerShape(5.dp)
@@ -52,7 +53,8 @@ fun LostItemsScreen(appViewModel: AppViewModel) {
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp
                     )
-                    Text(text = "Tipo: ${lostItemType?.name}", fontSize = 18.sp)
+                    Text(text = "${lostItemType?.name}${place.name}", fontSize = 18.sp)
+                    Text(text = "Perdido en ${place.name}", fontSize = 18.sp)
                     Text(
                         text = "Descripción: ${lostItem.description ?: "Sin descripción"}",
                         fontSize = 18.sp
