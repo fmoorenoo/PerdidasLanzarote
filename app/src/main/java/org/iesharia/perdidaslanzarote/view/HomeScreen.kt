@@ -202,6 +202,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
                     )
                     itemName = ""
                     description = ""
+                    phoneNumber = ""
                     selectedType = null
                     selectedPlace = null
                 }
