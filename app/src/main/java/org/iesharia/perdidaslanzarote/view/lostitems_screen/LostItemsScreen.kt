@@ -1,4 +1,4 @@
-package org.iesharia.perdidaslanzarote.view.lostitems
+package org.iesharia.perdidaslanzarote.view.lostitems_screen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*

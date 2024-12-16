@@ -1,4 +1,4 @@
-package org.iesharia.perdidaslanzarote.view.lostitems
+package org.iesharia.perdidaslanzarote.view.lostitems_screen
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
