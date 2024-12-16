@@ -1,4 +1,4 @@
-package org.iesharia.perdidaslanzarote.view
+package org.iesharia.perdidaslanzarote.view.home_screen
 
 import android.widget.Toast
 import androidx.compose.foundation.background

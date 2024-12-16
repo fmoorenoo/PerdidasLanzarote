@@ -1,4 +1,4 @@
-package org.iesharia.perdidaslanzarote.view
+package org.iesharia.perdidaslanzarote.view.map_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
