@@ -65,6 +65,12 @@ class AppViewModel(
         }
     }
 
+    fun getPlaceById(placeId: Int): Place {
+        return runBlocking {
+            placeDao.getPlaceById(placeId)
+        }
+    }
+
     fun getPlaces(): Flow<List<Place>> {
         return placeDao.getAllPlaces()
     }
