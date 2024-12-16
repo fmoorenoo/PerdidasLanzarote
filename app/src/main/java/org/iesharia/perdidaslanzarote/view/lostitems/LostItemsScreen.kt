@@ -1,5 +1,6 @@
-package org.iesharia.perdidaslanzarote.view
+package org.iesharia.perdidaslanzarote.view.lostitems
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -58,7 +59,7 @@ fun LostItemsScreen(appViewModel: AppViewModel) {
                     )
                     Text(text = "Contacto: ${lostItem.contact}", fontSize = 18.sp)
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().padding(top = 15.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Button(
@@ -93,6 +94,22 @@ fun LostItemsScreen(appViewModel: AppViewModel) {
                             )
                         }
                     }
+                }
+                if (showEditor && itemToEdit != null) {
+                    EditLostItem(
+                        lostItem = itemToEdit!!,
+                        onDismiss = { showEditor = false },
+                        onSave = { updatedItem ->
+                            if (updatedItem.itemName.isNotBlank() && updatedItem.contact.isNotBlank() && updatedItem.contact.length == 9) {
+                                appViewModel.updateLostItem(updatedItem)
+                                showEditor = false
+                            } else if (updatedItem.contact.length != 9) {
+                                Toast.makeText(context, "El número de teléfono debe tener 9 dígitos", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(context, "Completa los campos obligatorios", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    )
                 }
             }
         }
