@@ -220,6 +220,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
                     phoneNumber = ""
                     selectedType = null
                     selectedPlace = null
+                    Toast.makeText(context, "La pérdida ha sido publicada", Toast.LENGTH_SHORT).show()
                 }
                 else if (phoneNumber.length != 9) {
                     Toast.makeText(context, "El número de teléfono debe tener 9 dígitos", Toast.LENGTH_SHORT).show()
