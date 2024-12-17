@@ -95,65 +95,66 @@ fun HomeScreen(appViewModel: AppViewModel) {
                 }
             }
         }
-
-        OutlinedTextField(
-            value = itemName,
-            onValueChange = { itemName = it },
-            label = {
-                Text(
-                    text = if (selectedType != null) "Nombre del ${selectedType!!.name.lowercase()}" else "Nombre",
-                    fontSize = 19.sp
+        Spacer(modifier = Modifier.height(10.dp))
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            OutlinedTextField(
+                value = itemName,
+                onValueChange = { itemName = it },
+                label = {
+                    Text(
+                        text = if (selectedType != null) "Nombre del ${selectedType!!.name.lowercase()}" else "Nombre",
+                        fontSize = 19.sp
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color(0xFFDCDCDC),
+                    unfocusedContainerColor = Color(0xFFB0B0B0),
+                    focusedLabelColor = Color(0xFF5A67D8),
+                    cursorColor = Color(0xFF5A67D8)
                 )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            singleLine = true,
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color(0xFFDCDCDC),
-                unfocusedContainerColor = Color(0xFFB0B0B0),
-                focusedLabelColor = Color(0xFF5A67D8),
-                cursorColor = Color(0xFF5A67D8)
             )
-        )
 
-        OutlinedTextField(
-            value = phoneNumber,
-            onValueChange = { newValue ->
-                phoneNumber = newValue.filter { it.isDigit() }
-            },
-            label = { Text("Teléfono de contacto", fontSize = 19.sp) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            singleLine = true,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Phone
-            ),
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color(0xFFDCDCDC),
-                unfocusedContainerColor = Color(0xFFB0B0B0),
-                focusedLabelColor = Color(0xFF5A67D8),
-                cursorColor = Color(0xFF5A67D8)
+            OutlinedTextField(
+                value = phoneNumber,
+                onValueChange = { newValue ->
+                    phoneNumber = newValue.filter { it.isDigit() }
+                },
+                label = { Text("Teléfono de contacto", fontSize = 19.sp) },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Phone
+                ),
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color(0xFFDCDCDC),
+                    unfocusedContainerColor = Color(0xFFB0B0B0),
+                    focusedLabelColor = Color(0xFF5A67D8),
+                    cursorColor = Color(0xFF5A67D8)
+                )
             )
-        )
 
-        OutlinedTextField(
-            value = description,
-            onValueChange = { description = it },
-            label = { Text("Descripción (opcional)", fontSize = 19.sp) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            singleLine = false,
-            maxLines = 3,
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color(0xFFDCDCDC),
-                unfocusedContainerColor = Color(0xFFB0B0B0),
-                focusedLabelColor = Color(0xFF5A67D8),
-                cursorColor = Color(0xFF5A67D8)
+            OutlinedTextField(
+                value = description,
+                onValueChange = { description = it },
+                label = { Text("Descripción (opcional)", fontSize = 19.sp) },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = false,
+                maxLines = 3,
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color(0xFFDCDCDC),
+                    unfocusedContainerColor = Color(0xFFB0B0B0),
+                    focusedLabelColor = Color(0xFF5A67D8),
+                    cursorColor = Color(0xFF5A67D8)
+                )
             )
-        )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
 
         Text(
             text = "¿Dónde lo perdiste?",
