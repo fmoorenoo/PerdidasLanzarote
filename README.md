@@ -48,7 +48,7 @@
 ## ⚙️ Funcionamiento
 
 1. **Registro de Objetos Perdidos:**
-   - Los usuarios ingresan detalles como el nombre, tipo, descripción (opcional), contacto y localización del objeto perdido en la sección inicial 'Inicio'.
+   - Los usuarios ingresan el nombre, tipo, descripción (opcional), contacto y localización del objeto perdido en la sección inicial 'Inicio'.
    - La información se almacena de forma persistente en Room.
 
 2. **Visualización en el Mapa:**
@@ -56,4 +56,17 @@
 
 3. **Interacción con el Mapa:**
    - Al hacer clic en un marcador, se despliega una ventana con los detalles de cada pérdida en ese lugar.
+  
+## 📷 Resultado final  
+| Inicio | Ver pérdidas | Mapa |
+| -------------- | --------------- | --------------- |
+| <img width="350" src="https://github.com/user-attachments/assets/ac74cd3c-69db-4361-b9fd-8a16d3e8ec1d"> | <img width="350" src="https://github.com/user-attachments/assets/ffb0cb2a-a6cd-4680-8e49-cd389313e26a"> | <img width="350" src="https://github.com/user-attachments/assets/cac6e7fb-c331-4101-bf7c-44f268321159"> |
 
+<br>
+
+## ⚙️ Descarga el proyecto
+Puedes clonar el repositorio mediante el siguiente enlace, o descargar el archivo en un .zip
+https://github.com/fmoorenoo/perdidasLanzarote.git
+
+En Android Studio puedes clonarlo de la siguiente manera
+![image](https://github.com/user-attachments/assets/e42c3710-9584-48b3-a2e9-6ea27bf541d9)
