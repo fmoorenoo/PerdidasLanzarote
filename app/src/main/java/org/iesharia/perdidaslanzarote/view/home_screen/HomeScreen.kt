@@ -46,18 +46,18 @@ fun HomeScreen(appViewModel: AppViewModel) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Card(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF5A67D8)),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0x9A5A67D9)),
             shape = RoundedCornerShape(12.dp)
         ) {
             Column(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                modifier = Modifier.padding(7.dp).fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = "Registrar una pérdida",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 22.sp,
+                    fontSize = 28.sp,
                     color = Color.White
                 )
             }
@@ -83,13 +83,13 @@ fun HomeScreen(appViewModel: AppViewModel) {
                         .clickable { selectedType = type },
                     shape = RoundedCornerShape(10.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = if (type == selectedType) Color(0xFF6A5ACD) else Color(0xFFD9DBE9)
+                        containerColor = if (type == selectedType) Color(0xFF94AFEF) else Color(0xFFD9DBE9)
                     )
                 ) {
                     Text(
                         text = type.name,
                         modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp),
-                        fontSize = 16.sp,
+                        fontSize = 20.sp,
                         color = if (type == selectedType) Color.White else Color(0xFF4A4A4A)
                     )
                 }
@@ -99,7 +99,12 @@ fun HomeScreen(appViewModel: AppViewModel) {
         OutlinedTextField(
             value = itemName,
             onValueChange = { itemName = it },
-            label = { Text( text = if (selectedType != null) "Nombre del ${selectedType!!.name.lowercase()}" else "Nombre") },
+            label = {
+                Text(
+                    text = if (selectedType != null) "Nombre del ${selectedType!!.name.lowercase()}" else "Nombre",
+                    fontSize = 19.sp
+                )
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
@@ -117,7 +122,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
             onValueChange = { newValue ->
                 phoneNumber = newValue.filter { it.isDigit() }
             },
-            label = { Text("Teléfono de contacto") },
+            label = { Text("Teléfono de contacto", fontSize = 19.sp) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
@@ -136,7 +141,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
         OutlinedTextField(
             value = description,
             onValueChange = { description = it },
-            label = { Text("Descripción (opcional)") },
+            label = { Text("Descripción (opcional)", fontSize = 19.sp) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
@@ -193,6 +198,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
                 }
             }
         }
+        Spacer(modifier = Modifier.height(8.dp))
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -230,7 +236,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
                 Text(
                     text = "Publicar pérdida",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
+                    fontSize = 24.sp,
                     color = Color.White
                 )
             }
