@@ -11,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -64,7 +65,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
         Text(
             text = "¿Qué has perdido?",
             fontWeight = FontWeight.SemiBold,
-            fontSize = 18.sp,
+            fontSize = 22.sp,
             color = Color(0xFF313131),
             modifier = Modifier.padding(top = 8.dp)
         )
@@ -152,7 +153,7 @@ fun HomeScreen(appViewModel: AppViewModel) {
         Text(
             text = "¿Dónde lo perdiste?",
             fontWeight = FontWeight.SemiBold,
-            fontSize = 18.sp,
+            fontSize = 22.sp,
             color = Color(0xFF313131),
             modifier = Modifier.padding(top = 8.dp)
         )
@@ -161,26 +162,33 @@ fun HomeScreen(appViewModel: AppViewModel) {
                 onClick = { expandedPlace = true },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                    .padding(bottom = 8.dp),
                 colors = ButtonDefaults.outlinedButtonColors(
                     containerColor = Color(0xFFD9DBE9),
                     contentColor = Color(0xFF4A4A4A)
                 )
             ) {
-                Text(selectedPlace?.name ?: "Selecciona un lugar")
+                Text(
+                    text = selectedPlace?.name ?: "Selecciona un lugar",
+                    fontSize = 16.sp
+                )
             }
             DropdownMenu(
                 expanded = expandedPlace,
                 onDismissRequest = { expandedPlace = false },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .width(200.dp)
+                    .background(Color(0xCB4D5BA1))
+                    .clip(shape = RoundedCornerShape(15.dp))
+                    .padding(8.dp)
             ) {
                 places.forEach { place ->
                     DropdownMenuItem(
-                        text = { Text(place.name) },
+                        text = { Text(text = place.name, fontSize = 17.sp, color = Color.White) },
                         onClick = {
                             selectedPlace = place
                             expandedPlace = false
-                        }
+                        },
                     )
                 }
             }
