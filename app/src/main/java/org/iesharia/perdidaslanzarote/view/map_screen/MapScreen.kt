@@ -110,7 +110,7 @@ fun MapScreen(appViewModel: AppViewModel) {
                     ) {
                         // Nombre del lugar
                         Text(
-                            text = "${it.title}  -  $lostItemsCount pérdidas",
+                            text = "${it.title}  -  $lostItemsCount " + if (lostItemsCount == 1) "pérdida" else "pérdidas",
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
                             fontSize = 22.sp,
